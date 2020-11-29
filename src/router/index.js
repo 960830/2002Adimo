@@ -1,14 +1,54 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/login/login.vue")
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("@/views/home.vue"),
+    redirect: "/list",
+    children: [
+      {
+        path: "/list",
+        name: "list",
+        component: () => import("@/views/list.vue"),
+        meta:{
+          bread:[{name:"首页"}]
+        }
+      },
+      {
+        path: "/users",
+        name: "users",
+        component: () => import("@/views/users/users.vue"),
+        meta:{
+          bread:[{name:"用户列表"}]
+        }
+      },
+      {
+        path: "/roles",
+        name: "juese",
+        component: () => import("@/views/quan/juese.vue"),
+        meta:{
+          bread:[{name:"角色管理"}]
+        }
+      },
+      {
+        path: "/rights",
+        name: "list",
+        component: () => import("@/views/quan/list.vue"),
+        meta:{
+          bread:[{name:"权限列表"}]
+        }
+      },
+    ]
   },
   {
     path: "/about",
